@@ -1,0 +1,50 @@
+{
+  "it": {
+    "AntichitaGrecoRomana": {
+      "descrizione": "Nell'antichità greco-romana, la disabilità era vista come un difetto e le persone con disabilità erano emarginate e considerate inferiori. Il concetto di perfezione fisica era centrale, portando alla marginalizzazione di coloro che non rispecchiano gli standard prestabiliti."
+    },
+    "PeriodoCristiano": {
+      "descrizione": "Con l'avvento del cristianesimo, si è passati dalla visione punitiva alla compassione verso i disabili. Tuttavia, la disabilità continuava ad essere considerata come una punizione divina, legata al concetto di peccato e colpevolizzazione."
+    },
+    "Medioevo": {
+      "descrizione": "Nel Medioevo, le persone con disabilità erano emarginate e spesso accusate di rapporti con il diavolo. Si sviluppò una mentalità che le escludeva dalla società, portando all'apertura di ospedali e manicomi per separarle dal resto della comunità."
+    },
+    "Nazismo": {
+      "descrizione": "Durante il nazismo, la disabilità fu oggetto di genocidio. Le persone con disabilità furono considerate vite indegne di essere vissute, portando a sterilizzazioni, eutanasie e lavoro forzato nei campi di concentramento."
+    },
+    "EpocaContemporanea": {
+      "descrizione": "A partire dagli anni '70, i diritti delle persone con disabilità hanno iniziato ad essere riconosciuti in ambiti come l'educazione e il lavoro, promuovendo una maggiore inclusione sociale. Questo cambiamento ha segnato una svolta significativa nella percezione e nei diritti delle persone con disabilità nella società moderna."
+    },
+    "PianoInclusione": {
+      "descrizione": "Il Piano per l'inclusione delle persone con disabilità prevede una serie di finanziamenti unici, tra cui il Fondo per le regole dei desideri degli esseri umani con disabilità. Questo fondo ha sostenuto adeguamenti legislativi per rispondere ai bisogni emergenti e garantire risorse adeguate per promuovere l'inclusione delle persone con disabilità. Gli enti per l'erogazione scolastica degli studenti disabili sono regolati dalla legge di bilancio 2022, che destina una parte del patrimonio del Fondo di solidarietà comunale per incrementare il trasporto degli studenti universitari disabili. Le risorse stanziate per gli anni 2022-2028 variano da 30 milioni di euro nel 2022 a centoventi milioni di euro a partire dal 2027.",
+      "NormeNonAutosufficienza": "Le norme sulla non autosufficienza e sulla disabilità coprono interventi socio-sanitari dedicati alle classi fragili e ai malati cronici. Il regolamento di bilancio 2020 ha istituito il 'Fondo per l'inabilità e la non autosufficienza' con una dotazione in crescita fino al 2022. La legge di bilancio 2022 ha introdotto il 'Fondo per le politiche a favore delle persone con disabilità' aumentando gli stanziamenti per gli anni dal 2023 al 2026.",
+      "Legge227_2021": "La Legge n. 227 del 2021 rappresenta un passo significativo nei diritti delle persone con disabilità in Italia, delegando al Governo la revisione delle disposizioni esistenti. Questa legge si basa su norme che definiscono l'inabilità, valutano la disabilità in modo multidimensionale e promuovono una vita indipendente e inclusiva.",
+      "PNNA": "Il Piano Nazionale per la Non Autosufficienza (PNNA) per il triennio 2022-2024 è un dispositivo fondamentale che mira a garantire l'accesso ai servizi socio-sanitari alle persone non autosufficienti. Con un focus sull'universalità, servizi integrati e finanziamenti consistenti, il PNNA si propone di migliorare l'accesso ai servizi socio-sanitari e promuovere interventi mirati.",
+      "CED": "La Carta Europea Invalidità (CED) è diventata disponibile dal 22 febbraio 2022 tramite il portale INPS, offrendo diritti speciali in materia di trasporti, vita e intrattenimento alle persone con disabilità."
+    }
+  },
+"en":{
+        "GrecoRomanAntiquity": {
+        "description": "In Greco-Roman antiquity, disability was seen as a defect, and people with disabilities were marginalized and considered inferior. The concept of physical perfection was central, leading to the marginalization of those who did not reflect the established standards."
+    },
+        "ChristianEra": {
+        "description": "With the advent of Christianity, there was a shift from a punitive view to compassion towards the disabled. However, disability continued to be seen as a divine punishment, linked to the concept of sin and blame."
+    },
+        "MiddleAges": {
+        "description": "In the Middle Ages, people with disabilities were marginalized and often accused of dealings with the devil. A mentality developed that excluded them from society, leading to the opening of hospitals and asylums to separate them from the rest of the community."
+    },
+        "Nazism": {
+        "description": "During Nazism, disability was subject to genocide. People with disabilities were considered lives unworthy of living, leading to sterilizations, euthanasia, and forced labor in concentration camps."
+    },
+        "ContemporaryEra": {
+        "description": "Since the 1970s, the rights of people with disabilities have begun to be recognized in areas such as education and work, promoting greater social inclusion. This change marked a significant turning point in the perception and rights of people with disabilities in modern society."
+    },
+        "InclusionPlan": {
+        "description": "The Plan for the inclusion of people with disabilities includes a series of unique funding, including the Fund for the rules of the wishes of human beings with disabilities. This fund has supported legislative adjustments to respond to emerging needs and ensure adequate resources to promote the inclusion of people with disabilities. The entities for the educational provision of disabled students are regulated by the 2022 budget law, which allocates a portion of the assets of the Municipal Solidarity Fund to increase the transport of disabled university students. The resources allocated for the years 2022-2028 vary from 30 million euros in 2022 to one hundred and twenty million euros starting from 2027.",
+        "NonSelfSufficiencyNorms": "The norms on non-self-sufficiency and disability cover socio-health interventions dedicated to fragile classes and chronic patients. The 2020 budget regulation established the 'Fund for Disability and Non-Self-Sufficiency' with a growing endowment until 2022. The 2022 budget law introduced the 'Fund for policies in favor of people with disabilities' increasing the allocations for the years from 2023 to 2026.",
+        "Law227_2021": "Law no. 227 of 2021 represents a significant step in the rights of people with disabilities in Italy, delegating the Government to review existing provisions. This law is based on norms that define disability, assess disability in a multidimensional way, and promote an independent and inclusive life.",
+        "PNNA": "The National Plan for Non-Self-Sufficiency (PNNA) for the three-year period 2022-2024 is a fundamental device aimed at ensuring access to socio-health services for non-self-sufficient people. With a focus on universality, integrated services, and consistent funding, the PNNA aims to improve access to socio-health services and promote targeted interventions.",
+        "CED": "The European Disability Card (CED) has been available since February 22, 2022, through the INPS portal, offering special rights in terms of transport, life, and entertainment for people with disabilities."
+    }
+}
+}

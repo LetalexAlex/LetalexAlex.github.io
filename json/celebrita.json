@@ -1,0 +1,46 @@
+{
+    "it":{
+        "title": "Celebrità dell'Accessibilità: Ispirare un Cambiamento Positivo",
+            "paragraph": "Celebriamo coloro che si sono distinti nel promuovere l'accessibilità e i diritti delle persone con disabilità, ispirando gli altri a seguire il loro esempio per creare un mondo più inclusivo. Dalle figure pubbliche agli attivisti locali, c'è una ricca varietà di persone che si dedicano a promuovere l'accessibilità e l'inclusione. Questi individui ci mostrano il potere del cambiamento positivo e ci incoraggiano a lavorare insieme per eliminare le barriere e creare un mondo più equo e accessibile per tutti. Riconosciamo e celebriamo il loro impegno e la loro leadership nel portare avanti la causa dell'accessibilità per tutti. Ogni azione, grande o piccola, contribuisce a promuovere un cambiamento positivo e a creare un futuro migliore per le generazioni a venire.",
+            "celebrities": [
+            {
+                "name": "Stevie Wonder",
+                "description": "Conosciuto in tutto il mondo per il suo straordinario talento musicale, Stevie Wonder è anche un fervente sostenitore dei diritti delle persone con disabilità. Ha lavorato attivamente per sensibilizzare sulle sfide affrontate dalle persone non vedenti e ha promosso l'accessibilità nei settori della musica e dell'intrattenimento."
+            },
+            {
+                "name": "Marla Runyan",
+                "description": "Marla Runyan è una corritrice non vedente che ha gareggiato in numerose competizioni internazionali, inclusi i Giochi Paralimpici. Ha dimostrato al mondo che le persone non vedenti possono competere e avere successo in eventi sportivi di alto livello, ispirando altri con disabilità a perseguire i propri sogni."
+            },
+            {
+                "name": "Haben Girma",
+                "description": "Haben Girma è un'avvocata e attivista non vedente che ha difeso i diritti delle persone con disabilità, in particolare per quanto riguarda l'accesso all'istruzione e all'informazione. È stata la prima studentessa non vedente a laurearsi alla Harvard Law School e ha continuato a lavorare per rendere il mondo un luogo più inclusivo per tutti."
+            },
+            {
+                "name": "Erik Weihenmayer",
+                "description": "Erik Weihenmayer è un alpinista non vedente che ha scalato le vette più alte di tutti i continenti, incluso l'Everest. Il suo coraggio e la sua determinazione hanno dimostrato che le persone non vedenti possono superare sfide incredibili e raggiungere traguardi straordinari."
+            }
+        ]
+    },
+    "en":{
+        "title": "Accessibility Celebrities: Inspiring Positive Change",
+        "paragraph": "We celebrate those who have distinguished themselves in promoting accessibility and the rights of people with disabilities, inspiring others to follow their example to create a more inclusive world. From public figures to local activists, there is a rich variety of individuals dedicated to promoting accessibility and inclusion. These individuals show us the power of positive change and encourage us to work together to eliminate barriers and create a fairer and more accessible world for all. We recognize and celebrate their commitment and leadership in advancing the cause of accessibility for everyone. Every action, big or small, contributes to promoting positive change and creating a better future for generations to come.",
+        "celebrities": [
+            {
+                "name": "Stevie Wonder",
+                "description": "Known worldwide for his extraordinary musical talent, Stevie Wonder is also a fervent advocate for the rights of people with disabilities. He has actively worked to raise awareness about the challenges faced by blind individuals and has promoted accessibility in the fields of music and entertainment."
+            },
+            {
+                "name": "Marla Runyan",
+                "description": "Marla Runyan is a visually impaired runner who has competed in numerous international competitions, including the Paralympic Games. She has shown the world that visually impaired individuals can compete and succeed in high-level sporting events, inspiring others with disabilities to pursue their dreams."
+            },
+            {
+                "name": "Haben Girma",
+                "description": "Haben Girma is a blind lawyer and activist who has advocated for the rights of people with disabilities, particularly regarding access to education and information. She was the first blind student to graduate from Harvard Law School and has continued to work to make the world a more inclusive place for all."
+            },
+            {
+                "name": "Erik Weihenmayer",
+                "description": "Erik Weihenmayer is a blind mountaineer who has climbed the highest peaks on all seven continents, including Mount Everest. His courage and determination have shown that blind individuals can overcome incredible challenges and achieve extraordinary accomplishments."
+            }
+        ]
+    }   
+}

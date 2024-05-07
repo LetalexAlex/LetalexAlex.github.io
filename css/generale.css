@@ -1,0 +1,122 @@
+/* Base Styles */
+body {
+    font-family: 'Montserrat', Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0px;
+    background-color: #f4f4f4;
+    color: #333;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.header {
+    /*background-color: rgb(255, 228, 228);*/
+    padding: 20px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: #4ba2ff;
+}
+
+p, .braille, .work, .laws, .aquarium, .institution {
+    margin-bottom: 20px;
+    font-size: 16px;
+    line-height: 1.8;
+}
+
+a {
+    color: #007bff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover, a:focus {
+    text-decoration: underline;
+    color: #0056b3;
+}
+
+.section {
+    background-color: #fff;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+.navigation-buttons {
+    float: right;
+}
+
+/* Button Styles */
+.button, .toggle-dark-mode, #switch-lang, #read, #stop {
+    display: inline-block;
+    background-color: #007bff;
+    color: #ffffff;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.button:hover, .toggle-dark-mode:hover, .bottone-lingua:hover {
+    background-color: #007bff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.button:active {
+    background-color: #004494;
+    transform: translateY(1px);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+/* Dark Mode Styles */
+[data-theme='dark'], .dark-mode {
+    background-color: #333;
+    color: #f0f0f0;
+}
+
+[data-theme='dark'] a, .dark-mode a {
+    color: #ffffff;
+}
+[data-theme='dark'] .header  {
+    background-color: #696969;
+}
+
+/* Header Styles */
+#header {
+    background-color: #29b7ff;
+    position: relative;
+}
+
+
+/* Responsiveness */
+@media (max-width: 768px) {
+    .button {
+        padding: 8px 16px;
+        font-size: 14px;
+    }
+}
+
+main {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+li img {
+    width: 100%;
+}
+
+.img_site{
+    max-width: 30%;
+    height: auto;
+    border-radius: 5px;
+}
