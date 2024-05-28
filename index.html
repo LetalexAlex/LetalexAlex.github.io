@@ -4,60 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Game Menu</title>
-    <style>
-        /* Stile per il corpo della pagina */
-        body {
-            font-family: Arial, sans-serif; /* Font della pagina */
-            display: flex; /* Utilizzo di Flexbox per il layout */
-            flex-direction: column; /* Disposizione degli elementi in colonna */
-            align-items: center; /* Allineamento degli elementi al centro */
-            justify-content: center; /* Centratura verticale degli elementi */
-            height: 100vh; /* Altezza della pagina pari all'altezza della finestra */
-            margin: 0; /* Rimozione dei margini */
-            background: linear-gradient(135deg, #8e44ad, #3498db, #e74c3c, #2ecc71); /* Gradiente di sfondo */
-            background-size: 400% 400%; /* Dimensione del gradiente */
-            animation: gradient 15s ease infinite; /* Animazione del gradiente */
-        }
-
-        /* Definizione dell'animazione del gradiente */
-        @keyframes gradient {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        /* Stile per il contenitore del menu */
-        .menu {
-            background-color: rgba(236, 240, 241, 0.8); /* Colore di sfondo semi-trasparente */
-            padding: 20px; /* Spaziatura interna */
-            border-radius: 8px; /* Angoli arrotondati */
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Ombra del contenitore */
-        }
-
-        /* Stile per il titolo del menu */
-        .menu h1 {
-            margin: 0 0 20px; /* Margine inferiore */
-            color: #9b59b6; /* Colore del testo */
-        }
-
-        /* Stile per i link del menu */
-        .menu a {
-            display: block; /* Visualizzazione a blocco */
-            margin: 10px 0; /* Margine verticale */
-            padding: 10px 20px; /* Spaziatura interna */
-            text-decoration: none; /* Rimozione della sottolineatura */
-            color: #fff; /* Colore del testo dei link */
-            background: linear-gradient(135deg, #8e44ad, #3498db); /* Gradiente di sfondo */
-            border-radius: 4px; /* Angoli arrotondati */
-            text-align: center; /* Allineamento del testo al centro */
-            transition: 0.3s ease; /* Transizione per l'effetto hover */
-        }
-
-        /* Stile per i link del menu al passaggio del mouse */
-        .menu a:hover {
-            background: linear-gradient(135deg, #3498db, #8e44ad); /* Gradiente di sfondo invertito */
-        }
-    </style>
+    <link rel="stylesheet" href="index.css">
 </head>
 <body>
     <div class="menu">
