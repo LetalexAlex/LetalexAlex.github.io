@@ -8,8 +8,6 @@ const CACHE_DATE_KEY = "scheduleCacheDate";
 const CACHE_TTL = 24 * 60 * 60 * 1000; // 24 ore in millisecondi
 
 // === FUNZIONI DI CACHE ===
-
-// Recupera il JSON salvato se ancora valido
 function getCachedSchedule() {
     const cachedData = localStorage.getItem(CACHE_KEY);
     const cachedTime = localStorage.getItem(CACHE_TIME_KEY);
@@ -20,7 +18,6 @@ function getCachedSchedule() {
     const age = Date.now() - Number(cachedTime);
     const today = new Date().toISOString().split("T")[0];
 
-    // 🔁 Invalida se: cache > 24 ore o se la data è cambiata (giorno nuovo)
     if (age > CACHE_TTL || cachedDate !== today) {
         console.log("🕒 Cache scaduta, rimuovo i dati salvati");
         localStorage.removeItem(CACHE_KEY);
@@ -36,7 +33,6 @@ function getCachedSchedule() {
     }
 }
 
-// Salva un nuovo JSON in cache
 function saveScheduleToCache(schedule) {
     const today = new Date().toISOString().split("T")[0];
     localStorage.setItem(CACHE_KEY, JSON.stringify(schedule));
@@ -45,9 +41,8 @@ function saveScheduleToCache(schedule) {
 }
 
 // === HANDLER PRINCIPALE ===
-
 async function handleFormSubmit(e) {
-    e.preventDefault(); // evita il ricaricamento della pagina
+    e.preventDefault();
 
     // 1️⃣ Controlla se c'è una versione in cache
     let schedule = getCachedSchedule();
@@ -60,44 +55,67 @@ async function handleFormSubmit(e) {
     console.log("⏳ Nessuna cache valida, scarico nuovi dati...");
 
     // 2️⃣ Se non c'è cache, scarica e analizza tutto
-    fetchPageContent("https://isisfacchinetti.edu.it/documento/orario-delle-lezioni/")
-        .then(extractPDFLinks)
-        .then(getSecondPDF)
-        .then(link => {
-            const proxyUrl = "https://nocors.letalexalexx.workers.dev/?url=" + link;
-            return extractAndOrganizeSchedule(proxyUrl)
-                .then(schedule => {
-                    saveScheduleToCache(schedule); // 3️⃣ Salva in cache
-                    showResult(schedule);
-                    return schedule;
-                });
+    fetchAndParseSchedule()
+        .then(schedule => {
+            saveScheduleToCache(schedule);
+            showResult(schedule);
         })
         .catch(showError);
 }
 
-// --- FUNZIONI DI SUPPORTO ---
+// === FUNZIONE UNIFICATA PER SCARICARE E PARSARE IL PDF ===
+async function fetchAndParseSchedule() {
+    // 📦 Load pdf.js and parser.js dynamically and parallel only when needed
+    await Promise.all([
+        loadScript("https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.9.179/pdf.min.js"),
+        loadScript("script/parser.js")
+    ]);
 
-function initClassList() {
-    fetchPageContent("https://isisfacchinetti.edu.it/documento/orario-delle-lezioni/")
+
+    return fetchPageContent("https://isisfacchinetti.edu.it/documento/orario-delle-lezioni/")
         .then(extractPDFLinks)
         .then(getSecondPDF)
         .then(link => {
             const proxyUrl = "https://nocors.letalexalexx.workers.dev/?url=" + link;
-            return extractAndOrganizeSchedule(proxyUrl)
-                .then(schedule => {
-                    const dl = document.querySelector("#classi");
-                    if (dl) {
-                        dl.innerHTML = Object.keys(schedule)
-                            .sort()
-                            .map(c => `<option value="${c}"></option>`)
-                            .join("");
-                    }
-                });
+            return extractAndOrganizeSchedule(proxyUrl);
+        });
+}
+
+
+// === INIT CLASS LIST ===
+function initClassList() {
+    // ✅ Se la cache è valida, usa quella (non scaricare nulla)
+    const cached = getCachedSchedule();
+    if (cached) {
+        console.log("✅ Classi caricate dalla cache");
+        const dl = document.querySelector("#classi");
+        if (dl) {
+            dl.innerHTML = Object.keys(cached)
+                .sort()
+                .map(c => `<option value="${c}"></option>`)
+                .join("");
+        }
+        return;
+    }
+
+    console.log("⏳ Nessuna cache valida, scarico l’orario per popolare la lista classi...");
+
+    // ❌ Se non c’è cache, scarica normalmente
+    fetchAndParseSchedule()
+        .then(schedule => {
+            saveScheduleToCache(schedule);
+            const dl = document.querySelector("#classi");
+            if (dl) {
+                dl.innerHTML = Object.keys(schedule)
+                    .sort()
+                    .map(c => `<option value="${c}"></option>`)
+                    .join("");
+            }
         })
         .catch(() => {});
 }
 
-// 1. Scarica la pagina HTML (usando il proxy CORS)
+// === ALTRE FUNZIONI DI SUPPORTO (restano identiche) ===
 function fetchPageContent(url) {
     const proxyUrl = "https://nocors.letalexalexx.workers.dev/?url=" + url;
     return fetch(proxyUrl)
@@ -107,7 +125,6 @@ function fetchPageContent(url) {
         });
 }
 
-// 2. Estrae tutti i link ai PDF desiderati
 function extractPDFLinks(html) {
     const regex = /https:\/\/isisfacchinetti\.edu\.it\/wp-content\/uploads\/2023\/10\/Orario-CLASSI-.+?\.pdf/gm;
     const pdfs = html.match(regex);
@@ -115,13 +132,11 @@ function extractPDFLinks(html) {
     return pdfs;
 }
 
-// 3. Prende il secondo PDF della lista (come nel tuo codice originale)
 function getSecondPDF(pdfs) {
     if (pdfs.length < 2) throw new Error("Meno di due PDF trovati!");
     return pdfs[1];
 }
 
-// 5. Mostra il risultato nel DOM
 function showResult(result) {
     let strClasse = document.querySelector("#classe").value.trim().toUpperCase();
     if (!/^\d+[A-Z]+$/.test(strClasse)) {
@@ -138,12 +153,10 @@ function showResult(result) {
         JSONclasse = result[strClasse]?.[strGiorno]?.[`${intOra}h00`];
     }
 
-    console.log(JSONclasse);
-
     if (JSONclasse) {
         document.querySelector("#aula").innerHTML = JSONclasse.aula;
         document.querySelector("#materia").innerHTML = JSONclasse.materia;
-        document.querySelector("#risultato").innerHTML = JSON.stringify(JSONclasse);
+        document.querySelector("#risultato").innerHTML = /*JSON.stringify(JSONclasse);*/ "";
     } else {
         document.querySelector("#aula").innerHTML = "";
         document.querySelector("#materia").innerHTML = "";
@@ -151,8 +164,18 @@ function showResult(result) {
     }
 }
 
-// 6. Gestione errori
 function showError(error) {
     console.error(error);
     document.querySelector("#risultato").innerHTML = "Errore: " + error.message;
+}
+
+function loadScript(src) {
+    return new Promise((resolve, reject) => {
+        const script = document.createElement("script");
+        script.src = src;
+        script.defer = true;
+        script.onload = resolve;
+        script.onerror = () => reject(new Error(`Errore nel caricamento di ${src}`));
+        document.head.appendChild(script);
+    });
 }
