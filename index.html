@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>FindMyClass</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style/style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.9.179/pdf.min.js" defer></script>
     <script src="script/parser.js" defer></script>
     <script src="script/fetch_link.js" defer></script>
@@ -11,7 +11,8 @@
 <body>
 <form id="form">
     <label for="classe">Classe:</label>
-    <input type="text" name="classe" id="classe">
+    <input type="text" name="classe" id="classe" list="classi">
+    <datalist id="classi"></datalist>
     <br>
     <label for="giorno">Giorno:</label>
     <select name="giorno" id="giorno">

@@ -1,4 +1,5 @@
 document.querySelector("#form").addEventListener("submit", handleFormSubmit);
+document.addEventListener("DOMContentLoaded", initClassList);
 
 // === COSTANTI PER IL CACHE ===
 const CACHE_KEY = "scheduleCache";
@@ -64,7 +65,6 @@ async function handleFormSubmit(e) {
         .then(getSecondPDF)
         .then(link => {
             const proxyUrl = "https://nocors.letalexalexx.workers.dev/?url=" + link;
-
             return extractAndOrganizeSchedule(proxyUrl)
                 .then(schedule => {
                     saveScheduleToCache(schedule); // 3️⃣ Salva in cache
@@ -76,6 +76,26 @@ async function handleFormSubmit(e) {
 }
 
 // --- FUNZIONI DI SUPPORTO ---
+
+function initClassList() {
+    fetchPageContent("https://isisfacchinetti.edu.it/documento/orario-delle-lezioni/")
+        .then(extractPDFLinks)
+        .then(getSecondPDF)
+        .then(link => {
+            const proxyUrl = "https://nocors.letalexalexx.workers.dev/?url=" + link;
+            return extractAndOrganizeSchedule(proxyUrl)
+                .then(schedule => {
+                    const dl = document.querySelector("#classi");
+                    if (dl) {
+                        dl.innerHTML = Object.keys(schedule)
+                            .sort()
+                            .map(c => `<option value="${c}"></option>`)
+                            .join("");
+                    }
+                });
+        })
+        .catch(() => {});
+}
 
 // 1. Scarica la pagina HTML (usando il proxy CORS)
 function fetchPageContent(url) {
@@ -103,7 +123,11 @@ function getSecondPDF(pdfs) {
 
 // 5. Mostra il risultato nel DOM
 function showResult(result) {
-    let strClasse = document.querySelector("#classe").value;
+    let strClasse = document.querySelector("#classe").value.trim().toUpperCase();
+    if (!/^\d+[A-Z]+$/.test(strClasse)) {
+        showError(new Error("Classe non valida. Usa numeri seguiti da lettere senza spazi (es. 1A, 3BC)."));
+        return;
+    }
     let strGiorno = document.querySelector("#giorno").value;
     let strOra = document.querySelector("#ora").value;
     let intOra = Number.parseInt(/([0-9]+)h00/.exec(strOra)[0]);
