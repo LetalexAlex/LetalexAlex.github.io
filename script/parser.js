@@ -231,21 +231,11 @@ function mergeDoublePeriods(schedule) {
   }
 }
 
-/**
- * example
- * 
- * extractAndOrganizeSchedule('Orario-CLASSI-nona-settimana.pdf').then(schedule => {
+extractAndOrganizeSchedule("https://nocors.letalexalexx.workers.dev/?url=https://isisfacchinetti.edu.it/wp-content/uploads/2023/10/Orario-CLASSI-nona-settimana.pdf").then(schedule => {
   console.log(JSON.stringify(schedule, null, 2));
-  const blob = new Blob([JSON.stringify(schedule, null, 2)], { type: 'application/json' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = 'orario-struttura.json';
-  document.body.appendChild(a);
-  a.click();
-  a.remove();
-  URL.revokeObjectURL(url);
+  //const blob = new Blob([JSON.stringify(schedule, null, 2)], { type: 'application/json' });
+  //const url = URL.createObjectURL(blob);
+  //URL.revokeObjectURL(url);
 });
- */
 
 
