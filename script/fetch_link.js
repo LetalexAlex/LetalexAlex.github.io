@@ -1,9 +1,65 @@
 document.querySelector("#form").addEventListener("submit", handleFormSubmit);
 document.addEventListener("DOMContentLoaded", initClassList);
 
-function handleFormSubmit(e) {
+// === COSTANTI PER IL CACHE ===
+const CACHE_KEY = "scheduleCache";
+const CACHE_TIME_KEY = "scheduleCacheTime";
+const CACHE_DATE_KEY = "scheduleCacheDate";
+const CACHE_TTL = 24 * 60 * 60 * 1000; // 24 ore in millisecondi
+
+// === FUNZIONI DI CACHE ===
+
+// Recupera il JSON salvato se ancora valido
+function getCachedSchedule() {
+    const cachedData = localStorage.getItem(CACHE_KEY);
+    const cachedTime = localStorage.getItem(CACHE_TIME_KEY);
+    const cachedDate = localStorage.getItem(CACHE_DATE_KEY);
+
+    if (!cachedData || !cachedTime || !cachedDate) return null;
+
+    const age = Date.now() - Number(cachedTime);
+    const today = new Date().toISOString().split("T")[0];
+
+    // 🔁 Invalida se: cache > 24 ore o se la data è cambiata (giorno nuovo)
+    if (age > CACHE_TTL || cachedDate !== today) {
+        console.log("🕒 Cache scaduta, rimuovo i dati salvati");
+        localStorage.removeItem(CACHE_KEY);
+        localStorage.removeItem(CACHE_TIME_KEY);
+        localStorage.removeItem(CACHE_DATE_KEY);
+        return null;
+    }
+
+    try {
+        return JSON.parse(cachedData);
+    } catch {
+        return null;
+    }
+}
+
+// Salva un nuovo JSON in cache
+function saveScheduleToCache(schedule) {
+    const today = new Date().toISOString().split("T")[0];
+    localStorage.setItem(CACHE_KEY, JSON.stringify(schedule));
+    localStorage.setItem(CACHE_TIME_KEY, Date.now().toString());
+    localStorage.setItem(CACHE_DATE_KEY, today);
+}
+
+// === HANDLER PRINCIPALE ===
+
+async function handleFormSubmit(e) {
     e.preventDefault(); // evita il ricaricamento della pagina
 
+    // 1️⃣ Controlla se c'è una versione in cache
+    let schedule = getCachedSchedule();
+    if (schedule) {
+        console.log("✅ Dati caricati dalla cache");
+        showResult(schedule);
+        return;
+    }
+
+    console.log("⏳ Nessuna cache valida, scarico nuovi dati...");
+
+    // 2️⃣ Se non c'è cache, scarica e analizza tutto
     fetchPageContent("https://isisfacchinetti.edu.it/documento/orario-delle-lezioni/")
         .then(extractPDFLinks)
         .then(getSecondPDF)
@@ -11,6 +67,7 @@ function handleFormSubmit(e) {
             const proxyUrl = "https://nocors.letalexalexx.workers.dev/?url=" + link;
             return extractAndOrganizeSchedule(proxyUrl)
                 .then(schedule => {
+                    saveScheduleToCache(schedule); // 3️⃣ Salva in cache
                     showResult(schedule);
                     return schedule;
                 });
@@ -64,14 +121,6 @@ function getSecondPDF(pdfs) {
     return pdfs[1];
 }
 
-// 4. Scarica il contenuto del PDF (in formato testo grezzo)
-async function fetchPDF(link) {
-    const proxyUrl = "https://nocors.letalexalexx.workers.dev/?url=" + link;
-    const response = await fetch(proxyUrl);
-    if (!response.ok) throw new Error(`Errore nel fetch del PDF: ${response.status}`);
-    return await response.text();
-}
-
 // 5. Mostra il risultato nel DOM
 function showResult(result) {
     let strClasse = document.querySelector("#classe").value.trim().toUpperCase();
@@ -82,23 +131,24 @@ function showResult(result) {
     let strGiorno = document.querySelector("#giorno").value;
     let strOra = document.querySelector("#ora").value;
     let intOra = Number.parseInt(/([0-9]+)h00/.exec(strOra)[0]);
-    let JSONclasse = result[strClasse][strGiorno][strOra];
-    if(!JSONclasse) {
+    let JSONclasse = result[strClasse]?.[strGiorno]?.[strOra];
+
+    if (!JSONclasse) {
         intOra++;
-        JSONclasse = result[strClasse][strGiorno][`${intOra}h00`];
+        JSONclasse = result[strClasse]?.[strGiorno]?.[`${intOra}h00`];
     }
+
     console.log(JSONclasse);
-    if(JSONclasse) {
+
+    if (JSONclasse) {
         document.querySelector("#aula").innerHTML = JSONclasse.aula;
         document.querySelector("#materia").innerHTML = JSONclasse.materia;
         document.querySelector("#risultato").innerHTML = JSON.stringify(JSONclasse);
-    }
-    else {
+    } else {
         document.querySelector("#aula").innerHTML = "";
         document.querySelector("#materia").innerHTML = "";
-        document.querySelector("#risultato").innerHTML = "<strong>La classe esce alle 14!</strong>"
+        document.querySelector("#risultato").innerHTML = "<strong>La classe esce alle 14!</strong>";
     }
-
 }
 
 // 6. Gestione errori
