@@ -2,15 +2,41 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Game Menu</title>
-    <link rel="stylesheet" href="index.css">
+    <title>FindMyClass</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.9.179/pdf.min.js" defer></script>
+    <script src="script/parser.js" defer></script>
+    <script src="script/fetch_link.js" defer></script>
 </head>
 <body>
-    <div class="menu">
-        <h1>Game Menu</h1>
-        <a href="flappybird.html">Play Flappy Bird</a>
-        <a href="pong.html">Play Pong</a>
-    </div>
+<form id="form">
+    <label for="classe">Classe:</label>
+    <input type="text" name="classe" id="classe">
+    <br>
+    <label for="giorno">Giorno:</label>
+    <select name="giorno" id="giorno">
+        <option value="lunedì">Lunedì</option>
+        <option value="martedì">Martedì</option>
+        <option value="mercoledì">Mercoledì</option>
+        <option value="giovedì">Giovedì</option>
+        <option value="venerdì">Venerdì</option>
+    </select>
+    <br>
+    <label for="ora">Ora:</label>
+    <select name="ora" id="ora">
+        <option value="8h00">8:00-9:00</option>
+        <option value="9h00">9:00-10:00</option>
+        <option value="10h00">10:00-11:00</option>
+        <option value="11h00">11:00-12:00</option>
+        <option value="12h00">12:00-13:00</option>
+        <option value="13h00">13:00-14:00</option>
+        <option value="14h00">14:00-15:00</option>
+    </select>
+    <br>
+    <input type="submit" value="Cerca">
+</form>
+<h1 id="aula"></h1>
+<h2 id="materia"></h2>
+<p id="risultato"></p>
 </body>
 </html>
