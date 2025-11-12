@@ -101,14 +101,6 @@ function getSecondPDF(pdfs) {
     return pdfs[1];
 }
 
-// 4. Scarica il contenuto del PDF (in formato testo grezzo)
-async function fetchPDF(link) {
-    const proxyUrl = "https://nocors.letalexalexx.workers.dev/?url=" + link;
-    const response = await fetch(proxyUrl);
-    if (!response.ok) throw new Error(`Errore nel fetch del PDF: ${response.status}`);
-    return await response.text();
-}
-
 // 5. Mostra il risultato nel DOM
 function showResult(result) {
     let strClasse = document.querySelector("#classe").value;
