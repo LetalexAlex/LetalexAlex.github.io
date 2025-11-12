@@ -6,8 +6,16 @@ function handleFormSubmit(e) {
     fetchPageContent("https://isisfacchinetti.edu.it/documento/orario-delle-lezioni/")
         .then(extractPDFLinks)
         .then(getSecondPDF)
-        .then(fetchPDF)
-        .then(showResult)
+        .then(link => {
+            const proxyUrl = "https://nocors.letalexalexx.workers.dev/?url=" + link;
+
+            return extractAndOrganizeSchedule(proxyUrl)
+                .then(schedule => {
+                    console.log(JSON.stringify(schedule, null, 2));
+                    showResult(JSON.stringify(schedule, null, 2));
+                    return schedule;
+                });
+        })
         .catch(showError);
 }
 
