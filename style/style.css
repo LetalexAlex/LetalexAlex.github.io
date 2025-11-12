@@ -24,6 +24,7 @@ body {
     min-height: 100vh;
     margin: 0;
     padding: clamp(1rem, 4vw, 2.2rem);
+    gap: clamp(0.9rem, 3vh, 1.6rem);
 }
 
 /* Glass card form */
@@ -177,4 +178,136 @@ input[type="submit"]:hover {
     label {
         font-size: 0.85rem;
     }
+}
+
+/* Header */
+.site-header {
+    background: var(--glass-bg);
+    backdrop-filter: blur(18px) saturate(150%);
+    -webkit-backdrop-filter: blur(18px) saturate(150%);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: clamp(1rem, 5vw, 1.5rem);
+    width: 100%;
+    max-width: 520px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+    margin-bottom: 1rem;
+}
+
+.site-title {
+    margin: 0;
+    font-size: clamp(1.35rem, 5vw, 1.8rem);
+    letter-spacing: 0.3px;
+}
+
+.site-subtitle {
+    margin: 0;
+    color: var(--muted);
+    font-size: clamp(0.9rem, 3.2vw, 1rem);
+}
+
+/* Buy Me a Coffee button */
+.bmc-button {
+    display: inline-block;
+    margin-top: 0.6rem;
+    background: var(--accent);
+    color: #000;
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 999px;
+    padding: 0.6rem 1rem;
+    box-shadow: 0 8px 24px rgba(79,157,246,0.35);
+    transition: transform var(--transition), filter var(--transition), box-shadow var(--transition);
+}
+
+.bmc-button:hover {
+    filter: brightness(1.05);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(79,157,246,0.45);
+}
+
+.bmc-button:active {
+    transform: translateY(0);
+}
+
+/* Footer */
+.site-footer {
+    background: var(--glass-bg);
+    backdrop-filter: blur(14px) saturate(140%);
+    -webkit-backdrop-filter: blur(14px) saturate(140%);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    width: 100%;
+    max-width: 520px;
+    margin-top: clamp(1rem, 3.5vh, 2rem);
+    padding: 0.75rem 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.footer-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: color var(--transition), opacity var(--transition);
+}
+
+.footer-links a:hover {
+    color: var(--text-color);
+}
+
+@media (max-width: 600px) {
+    .site-footer {
+        padding: 0.65rem 0.8rem;
+    }
+    .footer-links {
+        gap: 0.8rem;
+    }
+}
+
+.results-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(18px) saturate(150%);
+    -webkit-backdrop-filter: blur(18px) saturate(150%);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: clamp(1rem, 5vw, 1.4rem);
+    width: 100%;
+    max-width: 520px;
+    margin-top: clamp(1rem, 3.5vh, 1.6rem);
+    text-align: center;
+    box-sizing: border-box;
+    animation: fadeIn 0.6s ease;
+}
+
+.results-card #aula {
+    font-size: clamp(1.6rem, 5.8vw, 2.1rem);
+    color: var(--accent);
+    margin: 0 0 0.25rem 0;
+}
+
+.results-card #materia {
+    font-size: clamp(1.05rem, 4.2vw, 1.4rem);
+    opacity: 0.9;
+    margin: 0 0 0.35rem 0;
+}
+
+.results-card #risultato {
+    font-size: clamp(0.98rem, 3.2vw, 1.08rem);
+    opacity: 0.85;
+    margin: 0.25rem 0 0 0;
 }
