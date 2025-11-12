@@ -1,40 +1,57 @@
-document.querySelector("#form").addEventListener("submit", function(e) {
+document.querySelector("#form").addEventListener("submit", handleFormSubmit);
+
+function handleFormSubmit(e) {
     e.preventDefault(); // evita il ricaricamento della pagina
 
-    // creazione dell’oggetto XMLHttpRequest
-    let xhr = new XMLHttpRequest();
+    fetchPageContent("https://isisfacchinetti.edu.it/documento/orario-delle-lezioni/")
+        .then(extractPDFLinks)
+        .then(getSecondPDF)
+        .then(fetchPDF)
+        .then(showResult)
+        .catch(showError);
+}
 
-    // definizione della funzione di callback
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState === 4) { // richiesta completata
-            if (xhr.status === 200) {
-                let pdfs = xhr.responseText.match(/https:\/\/isisfacchinetti\.edu\.it\/wp-content\/uploads\/2023\/10\/Orario-CLASSI-.+\.pdf/gm)
-                console.log(pdfs)
-                let pdfLink = pdfs[1];
-                fetchPDF(pdfLink).then(res => {
-                    document.querySelector("#risultato").innerHTML = res;
-                    // TODO picone continua da qua :D - res contiene dati del file raw
-                })
+// --- FUNZIONI DI SUPPORTO ---
 
-            } else {
-                document.querySelector("#risultato").innerHTML = "Errore nella richiesta!";
-            }
-        }
-    };
-    
-    xhr.open("GET", "https://nocors.letalexalexx.workers.dev/?url=https://isisfacchinetti.edu.it/documento/orario-delle-lezioni/")
-    xhr.send();
-    
-});
+// 1. Scarica la pagina HTML (usando il proxy CORS)
+function fetchPageContent(url) {
+    const proxyUrl = "https://nocors.letalexalexx.workers.dev/?url=" + url;
+    return fetch(proxyUrl)
+        .then(res => {
+            if (!res.ok) throw new Error("Errore nel caricamento della pagina");
+            return res.text();
+        });
+}
 
+// 2. Estrae tutti i link ai PDF desiderati
+function extractPDFLinks(html) {
+    const regex = /https:\/\/isisfacchinetti\.edu\.it\/wp-content\/uploads\/2023\/10\/Orario-CLASSI-.+?\.pdf/gm;
+    const pdfs = html.match(regex);
+    if (!pdfs || pdfs.length === 0) throw new Error("Nessun PDF trovato!");
+    return pdfs;
+}
+
+// 3. Prende il secondo PDF della lista (come nel tuo codice originale)
+function getSecondPDF(pdfs) {
+    if (pdfs.length < 2) throw new Error("Meno di due PDF trovati!");
+    return pdfs[1];
+}
+
+// 4. Scarica il contenuto del PDF (in formato testo grezzo)
 async function fetchPDF(link) {
-    try {
-        let response = await fetch("https://nocors.letalexalexx.workers.dev/?url=" + link)
-        if (!response.ok) {
-            throw new Error(`Could not fetch pdf: ${response.status}`);
-        }
-        return await response.text();
-    } catch (error) {
-        console.log(error);
-    }
+    const proxyUrl = "https://nocors.letalexalexx.workers.dev/?url=" + link;
+    const response = await fetch(proxyUrl);
+    if (!response.ok) throw new Error(`Errore nel fetch del PDF: ${response.status}`);
+    return await response.text();
+}
+
+// 5. Mostra il risultato nel DOM
+function showResult(result) {
+    document.querySelector("#risultato").innerHTML = result;
+}
+
+// 6. Gestione errori
+function showError(error) {
+    console.error(error);
+    document.querySelector("#risultato").innerHTML = "Errore: " + error.message;
 }
