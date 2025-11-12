@@ -11,7 +11,7 @@ function handleFormSubmit(e) {
 
             return extractAndOrganizeSchedule(proxyUrl)
                 .then(schedule => {
-                    console.log(JSON.stringify(schedule, null, 2));
+                    //console.log(JSON.stringify(schedule, null, 2));
                     showResult(schedule);
                     return schedule;
                 });
@@ -65,7 +65,17 @@ function showResult(result) {
         JSONclasse = result[strClasse][strGiorno][`${intOra}h00`];
     }
     console.log(JSONclasse);
-    document.querySelector("#risultato").innerHTML = JSON.stringify(JSONclasse);
+    if(JSONclasse) {
+        document.querySelector("#aula").innerHTML = JSONclasse.aula;
+        document.querySelector("#materia").innerHTML = JSONclasse.materia;
+        //document.querySelector("#risultato").innerHTML = JSON.stringify(JSONclasse);
+    }
+    else {
+        document.querySelector("#aula").innerHTML = "";
+        document.querySelector("#materia").innerHTML = "";
+        document.querySelector("#risultato").innerHTML = "<strong>La classe esce alle 14!</strong>"
+    }
+
 }
 
 // 6. Gestione errori
