@@ -55,7 +55,11 @@ async function fetchPDF(link) {
 
 // 5. Mostra il risultato nel DOM
 function showResult(result) {
-    let strClasse = document.querySelector("#classe").value;
+    let strClasse = document.querySelector("#classe").value.trim().toUpperCase();
+    if (!/^\d+[A-Z]+$/.test(strClasse)) {
+        showError(new Error("Classe non valida. Usa numeri seguiti da lettere senza spazi (es. 1A, 3BC)."));
+        return;
+    }
     let strGiorno = document.querySelector("#giorno").value;
     let strOra = document.querySelector("#ora").value;
     let intOra = Number.parseInt(/([0-9]+)h00/.exec(strOra)[0]);
