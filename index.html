@@ -9,7 +9,30 @@
 </head>
 <body>
 <form id="form">
-    <input type="submit" value="Fetch link">
+    <label for="classe">Classe:</label>
+    <input type="text" name="classe" id="classe">
+    <br>
+    <label for="giorno">Giorno:</label>
+    <select name="giorno" id="giorno">
+        <option value="lunedì">Lunedì</option>
+        <option value="martedì">Martedì</option>
+        <option value="mercoledì">Mercoledì</option>
+        <option value="giovedì">Giovedì</option>
+        <option value="venerdì">Venerdì</option>
+    </select>
+    <br>
+    <label for="ora">Ora:</label>
+    <select name="ora" id="ora">
+        <option value="8h00">8:00-9:00</option>
+        <option value="9h00">9:00-10:00</option>
+        <option value="10h00">10:00-11:00</option>
+        <option value="11h00">11:00-12:00</option>
+        <option value="12h00">12:00-13:00</option>
+        <option value="13h00">13:00-14:00</option>
+        <option value="14h00">14:00-15:00</option>
+    </select>
+    <br>
+    <input type="submit" value="Cerca">
 </form>
 <p id="risultato"></p>
 </body>

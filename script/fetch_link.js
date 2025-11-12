@@ -12,7 +12,7 @@ function handleFormSubmit(e) {
             return extractAndOrganizeSchedule(proxyUrl)
                 .then(schedule => {
                     console.log(JSON.stringify(schedule, null, 2));
-                    showResult(JSON.stringify(schedule, null, 2));
+                    showResult(schedule);
                     return schedule;
                 });
         })
@@ -55,7 +55,17 @@ async function fetchPDF(link) {
 
 // 5. Mostra il risultato nel DOM
 function showResult(result) {
-    document.querySelector("#risultato").innerHTML = result;
+    let strClasse = document.querySelector("#classe").value;
+    let strGiorno = document.querySelector("#giorno").value;
+    let strOra = document.querySelector("#ora").value;
+    let intOra = Number.parseInt(/([0-9]+)h00/.exec(strOra)[0]);
+    let JSONclasse = result[strClasse][strGiorno][strOra];
+    if(!JSONclasse) {
+        intOra++;
+        JSONclasse = result[strClasse][strGiorno][`${intOra}h00`];
+    }
+    console.log(JSONclasse);
+    document.querySelector("#risultato").innerHTML = JSON.stringify(JSONclasse);
 }
 
 // 6. Gestione errori
