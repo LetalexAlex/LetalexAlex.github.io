@@ -3,10 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <title>FindMyClass</title>
-    <link rel="stylesheet" href="style/style.css">
+    <link rel="stylesheet" href="style/style.css?v=20251112">
     <script src="script/fetch_link.js" defer></script>
 </head>
 <body>
+<header class="site-header">
+    <h1 class="site-title">FindMyClass</h1>
+    <p class="site-subtitle">Trova rapidamente aula e materia</p>
+    
+</header>
 <form id="form">
     <label for="classe">Classe:</label>
     <input type="text" name="classe" id="classe" list="classi">
@@ -34,9 +39,19 @@
     <br>
     <input type="submit" value="Cerca">
 </form>
-<h1 id="aula"></h1>
-<h2 id="materia"></h2>
-<p id="risultato"></p>
-<a href="https://www.buymeacoffee.com/axpico"><img src="https://img.buymeacoffee.com/button-api/?text=Buy us a coffee&emoji=☕&slug=axpico&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff" /></a>
+<div class="results-card">
+    <h1 id="aula"></h1>
+    <h2 id="materia"></h2>
+    <p id="risultato"></p>
+</div>
+
+<footer class="site-footer">
+    <nav class="footer-links">
+        <a href="https://github.com/LetalexAlex.github.io" target="_blank" rel="noopener noreferrer">LetalexAlex.github.io</a>
+        <a href="https://github.com/LetalexAlex" target="_blank" rel="noopener noreferrer">@LetalexAlex</a>
+        <a href="https://github.com/axpico" target="_blank" rel="noopener noreferrer">@axpico</a>
+    </nav>
+    <a class="bmc-button" href="https://www.buymeacoffee.com/axpico" target="_blank" rel="noopener noreferrer">☕ Buy us a coffee</a>
+</footer>
 </body>
 </html>
