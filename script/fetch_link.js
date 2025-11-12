@@ -3,6 +3,7 @@ document.querySelector("#form").addEventListener("submit", handleFormSubmit);
 // === COSTANTI PER IL CACHE ===
 const CACHE_KEY = "scheduleCache";
 const CACHE_TIME_KEY = "scheduleCacheTime";
+const CACHE_DATE_KEY = "scheduleCacheDate";
 const CACHE_TTL = 24 * 60 * 60 * 1000; // 24 ore in millisecondi
 
 // === FUNZIONI DI CACHE ===
@@ -11,14 +12,19 @@ const CACHE_TTL = 24 * 60 * 60 * 1000; // 24 ore in millisecondi
 function getCachedSchedule() {
     const cachedData = localStorage.getItem(CACHE_KEY);
     const cachedTime = localStorage.getItem(CACHE_TIME_KEY);
+    const cachedDate = localStorage.getItem(CACHE_DATE_KEY);
 
-    if (!cachedData || !cachedTime) return null;
+    if (!cachedData || !cachedTime || !cachedDate) return null;
 
     const age = Date.now() - Number(cachedTime);
-    if (age > CACHE_TTL) {
-        // Cache scaduta → rimuovila
+    const today = new Date().toISOString().split("T")[0];
+
+    // 🔁 Invalida se: cache > 24 ore o se la data è cambiata (giorno nuovo)
+    if (age > CACHE_TTL || cachedDate !== today) {
+        console.log("🕒 Cache scaduta, rimuovo i dati salvati");
         localStorage.removeItem(CACHE_KEY);
         localStorage.removeItem(CACHE_TIME_KEY);
+        localStorage.removeItem(CACHE_DATE_KEY);
         return null;
     }
 
@@ -31,8 +37,10 @@ function getCachedSchedule() {
 
 // Salva un nuovo JSON in cache
 function saveScheduleToCache(schedule) {
+    const today = new Date().toISOString().split("T")[0];
     localStorage.setItem(CACHE_KEY, JSON.stringify(schedule));
     localStorage.setItem(CACHE_TIME_KEY, Date.now().toString());
+    localStorage.setItem(CACHE_DATE_KEY, today);
 }
 
 // === HANDLER PRINCIPALE ===
