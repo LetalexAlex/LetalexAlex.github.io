@@ -68,7 +68,7 @@ function showResult(result) {
     if(JSONclasse) {
         document.querySelector("#aula").innerHTML = JSONclasse.aula;
         document.querySelector("#materia").innerHTML = JSONclasse.materia;
-        //document.querySelector("#risultato").innerHTML = JSON.stringify(JSONclasse);
+        document.querySelector("#risultato").innerHTML = JSON.stringify(JSONclasse);
     }
     else {
         document.querySelector("#aula").innerHTML = "";
